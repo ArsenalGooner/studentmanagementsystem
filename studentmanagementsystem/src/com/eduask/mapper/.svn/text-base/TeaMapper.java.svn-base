@@ -1,0 +1,9 @@
+package com.eduask.mapper;
+
+import java.util.List;
+
+import com.eduask.bean.TeaInfo;
+
+public interface TeaMapper {
+	public List<TeaInfo> tFindAll();
+}

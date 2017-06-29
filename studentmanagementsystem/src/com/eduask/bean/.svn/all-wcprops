@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/team/!svn/ver/15/studentmanagementsystem/src/com/eduask/bean
+END
+ScoInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/team/!svn/ver/15/studentmanagementsystem/src/com/eduask/bean/ScoInfo.java
+END
+ClassInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/team/!svn/ver/15/studentmanagementsystem/src/com/eduask/bean/ClassInfo.java
+END
+GraInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/team/!svn/ver/15/studentmanagementsystem/src/com/eduask/bean/GraInfo.java
+END
+SubInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/team/!svn/ver/15/studentmanagementsystem/src/com/eduask/bean/SubInfo.java
+END
+TeaInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/team/!svn/ver/15/studentmanagementsystem/src/com/eduask/bean/TeaInfo.java
+END
+StuInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/team/!svn/ver/15/studentmanagementsystem/src/com/eduask/bean/StuInfo.java
+END
+SchenInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/team/!svn/ver/15/studentmanagementsystem/src/com/eduask/bean/SchenInfo.java
+END
+RoleInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/team/!svn/ver/15/studentmanagementsystem/src/com/eduask/bean/RoleInfo.java
+END

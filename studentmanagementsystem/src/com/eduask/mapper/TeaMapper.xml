@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eduask.mapper.TeaMapper">
+  <resultMap type="com.eduask.bean.TeaInfo" id="tea">
+    <id column="teaId" property="teaId"/>
+    <result column="teaNum" property="teaNum"/>
+    <result column="teaPass" property="teaPass"/>
+    <result column="teaName" property="teaName"/>
+    <result column="teaSex" property="teaSex"/>
+    <result column="teaOri" property="teaOri"/>
+    <result column="teaNat" property="teaNat"/>
+    <result column="teaAge" property="teaAge"/>
+    <result column="teaPhone" property="teaPhone"/>
+    <result column="teaEdu" property="teaEdu"/>
+    <result column="subId" property="subId"/>
+    <result column="roleId" property="roleId"/>
+    <result column="teaState" property="teaState"/>
+    <association property="subInfo" javaType="com.eduask.bean.SubInfo">
+      <id column="subId" property="subId"/>
+      <result column="subName" property="subName"/>
+    </association>
+    <association property="roleInfo" javaType="com.eduask.bean.RoleInfo">
+      <id column="roleId" property="roleId"/>
+      <result column="roleName" property="roleName"/>
+    </association>
+  </resultMap>
+  <select id="findAll" resultMap="tea">
+    select *from teaInfo t,subInfo s,roleInfo r where t.subId=s.subId and t.roleId=r.roleId
+  </select>
+  <select id="findById" resultType="com.eduask.bean.TeaInfo" parameterType="int">
+    select *from teaInfo where teaId = #{teaId}
+  </select>
+  <insert id="add" parameterType="com.eduask.bean.TeaInfo">
+    insert into teaInfo values(null,#{teaNum},#{teaPass},#{teaName},#{teaSex},#{teaOri},#{teaNat},#{teaAge},#{teaPhone},#{teaEdu},#{subId},#{roleId},1) 
+  </insert>
+  <update id="update" parameterType="com.eduask.bean.TeaInfo">
+    update teaInfo set 
+    teaNum=#{teaNum},teaPass=#{teaPass},teaName=#{teaName},teaSex=#{teaSex},teaOri=#{teaOri},teaNat=#{teaNat},teaAge=#{teaAge},teaPhone=#{teaPhone},teaEdu=#{teaEdu},subId=#{subId},roleId=#{roleId} 
+    where teaId=#{teaId}
+  </update>
+  <delete id="delete" parameterType="int">
+    delete from teaInfo where teaId=#{teaId}
+  </delete>
+  <select id="search" resultMap="tea">
+	    select *from teaInfo t,subInfo s,roleInfo r 
+		<where>
+		<if test="teaName!=null">
+		OR teaName like CONCAT(CONCAT('%',#{teaName}),'%')
+		</if>
+		<if test="teaOri!=null">
+		OR teaOri like CONCAT(CONCAT('%','${teaOri}'),'%')
+		</if>
+		and t.subId=s.subId and t.roleId=r.roleId 
+		</where> 
+	</select>
+</mapper>

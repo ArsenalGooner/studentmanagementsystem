@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eduask.mapper.ScoMapper">
+	<!-- 全查询 -->
+	<resultMap type="com.eduask.bean.ScoInfo" id="cc">
+		<id column="scoid" property="scoId"/>
+		
+		<result column="scoval" property="scoVal"/>
+		
+		<association property="subInfo" javaType="com.eduask.bean.SubInfo">
+			<id column="subid" property="subId"/>
+			<result column="subname" property="subName"/>
+		</association>
+		<association property="stuInfo" javaType="com.eduask.bean.StuInfo">
+			<id column="stuid" property="stuId"/>
+			<result column="stuNum" property="stuNum"/>
+			<result column="stuPass" property="stuPass"/>
+			<result column="stuName" property="stuName"/>
+			<result column="stuSex" property="stuSex"/>
+			<result column="stuOri" property="stuOri"/>
+			<result column="stuNat" property="stuNat"/>
+			<result column="stuAge" property="stuAge"/>
+			<result column="stuPhone" property="stuPhone"/>
+		</association>
+	</resultMap>
+	
+	
+	<select id="findAll" resultMap="cc">
+		select * from scoInfo sc, stuInfo st, subInfo su where sc.subId=su.subId and sc.stuId=st.stuId
+	</select>
+	<!-- 增加成绩 -->
+	<!-- 
+	<insert id="addSco" parameterType="com.eduask.bean.ScoInfo">
+		insert scoInfo values(null,#{scoId},#{subId},#{classId},#{scoVal}) 
+	</insert>
+	 -->
+</mapper>

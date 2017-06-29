@@ -1,0 +1,21 @@
+package com.eduask.test;
+
+import java.util.Set;
+
+import com.eduask.bean.ScoInfo;
+import com.eduask.biz.scoBiz;
+import com.eduask.biz.impl.ScoBizImpl;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		scoBiz sb=new ScoBizImpl();
+		/*Set<ScoInfo> set=sb.findAll();
+		
+		System.out.println(set.size());*/
+		/*ScoInfo si=new ScoInfo();
+		si.setScoId(800);
+		si.setScoVal(50);
+		sb.addSco(si);*/
+	}
+}

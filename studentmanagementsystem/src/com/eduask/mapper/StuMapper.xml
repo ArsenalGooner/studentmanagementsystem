@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eduask.mapper.StuMapper">
+
+	<resultMap type="com.eduask.bean.StuInfo" id="stu">
+		<id column="stuId" property="stuId" />
+		<result column="stuNum" property="stuNum" />
+		<result column="stuPass" property="stuPass" />
+		<result column="stuName" property="stuName" />
+		<result column="stuSex" property="stuSex" />
+		<result column="stuOri" property="stuOri" />
+		<result column="stuNat" property="stuNat" />
+		<result column="stuAge" property="stuAge" />
+		<result column="stuPhone" property="stuPhone" />
+		<!-- <result column="classId" property="classId" /> -->
+		
+		<association property="classInfo" javaType="com.eduask.bean.ClassInfo">
+			<id column="classId" property="classId" />
+			<result column="className" property="className" />
+			<association property="graInfo" javaType="com.eduask.bean.GraInfo">
+				<id column="graId" property="graId" />
+				<result column="graName" property="graName" />
+			</association>
+		</association>
+		
+		<!-- <result column="stuState" property="stuState" /> -->
+		
+	</resultMap>
+
+	<select id="findAll" resultMap="stu">
+		SELECT * FROM GraInfo g ,ClassInfo c ,StuInfo s WHERE g.`graId`=c.`graId`
+		AND c.`classId`=s.`classId`
+	</select>
+	<select id="findById" resultType="com.eduask.bean.StuInfo"
+		parameterType="int">
+		select *from stuInfo where stuId = #{stuId }
+	</select>
+	<select id="findBy" resultType="com.eduask.bean.StuInfo"
+		parameterType="java.lang.String">
+		select *from stuInfo where stuName like #{str}
+	</select>
+	<insert id="add" parameterType="com.eduask.bean.StuInfo">
+		insert into stuInfo
+		values(null,#{stuNum},#{stuPass},#{stuName},#{stuSex},#{stuOri},#{stuNat},#{stuAge},#{stuPhone},#{classId},1)
+	</insert>
+	<update id="update" parameterType="com.eduask.bean.StuInfo">
+		update stuInfo set
+		stuNum=#{stuNum},stuPass=#{stuPass},stuName=#{stuName},stuSex=#{stuSex},stuOri=#{stuOri},stuNat=#{stuNat},stuAge=#{stuAge},stuPhone=#{stuPhone},classId=#{classId}
+		where stuId=#{stuId}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from stuInfo where stuId=#{stuId}
+	</delete>
+	<select id="search" resultMap="stu">
+	   SELECT * FROM GraInfo g ,ClassInfo c ,StuInfo s 
+		<where>
+		<if test="stuName!=null">
+		OR stuName like CONCAT(CONCAT('%',#{stuName}),'%')
+		</if>
+		<if test="stuOri!=null">
+		OR stuOri like CONCAT(CONCAT('%','${stuOri}'),'%')
+		</if>
+		and g.`graId`=c.`graId`	AND c.`classId`=s.`classId`
+		</where> 
+	</select>
+</mapper>

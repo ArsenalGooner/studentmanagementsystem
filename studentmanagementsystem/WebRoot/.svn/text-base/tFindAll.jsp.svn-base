@@ -1,0 +1,85 @@
+<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<html>
+<head>
+
+<title>教师查询页面</title>
+
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="http://www.bootcss.com/p/buttons/css/buttons.css">
+
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="jar/jquery-1.7.2.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("tr:first").css("backgroundColor", "#09F");
+		$("tr:first").css("color", "white");
+		$("tr:odd:not(tr:first)").css("backgroundColor", "");
+		$("tr:even:not(tr:first)").css("backgroundColor", "#CCC");
+	});
+
+	function deleteOne(tno) {
+		if (confirm("确定要删除么")) {
+			location.href = "TServlet?method=delete&tNo=" + tno;
+		}
+	}
+</script>
+</head>
+<c:if test="${empty TINFO }">
+	<c:redirect url="TServlet">
+		<c:param name="method" value="findAll"></c:param>
+	</c:redirect>
+</c:if>
+<body>
+	<table class="table table-striped" align="center">
+		<caption>
+			<form action="#" method="post">
+				<input type="text" name="输入值名字"
+					class="TEXT button-glow button-border button-rounded button-primary"
+					style="width: 320px;" /> <input type="hidden" name="名字"
+					value="方法名" /> <input type="submit" value="搜索一下"
+					class="button button-glow button-border button-rounded button-primary" />
+			</form>
+			<a href="注册新用户连接"><b>注册新用户</b> </a>
+		</caption>
+		<tr>
+			<th>编号</th>
+			<th>账号</th>
+			<th>姓名</th>
+			<th>性别</th>
+			<th>籍贯</th>
+			<th>民族</th>
+			<th>年龄</th>
+			<th>电话</th>
+			<th>学历</th>
+			<th>科目</th>
+			<th>角色</th>
+			<th>操作</th>
+		</tr>
+		<c:forEach var="ti" items="${TINFO }教师信息容器名" varStatus="t">
+			<tr><!--遍历教师信息-->
+				<td>${t.count }</td>
+				<td>${ti.tId }</td>
+				<td>${ti.tName }</td>
+				<td>${ti.tSex }</td>
+				<td>${ti.tOri }</td>
+				<td>${ti.tNat }</td>
+				<td>${ti.tAge }</td>
+				<td>${ti.tPhone }</td>
+				<td>${ti.eduBac }</td>
+				<td>${ti.si.subName }</td>
+				<td>${ti.ri.roleName }</td>
+				<td><a href="javascript:deleteOne(${参数})">删除</a> <a
+					href="id查询的位置?method=参数1 &tNo=${参数2}">修改</a></td>
+			</tr>
+		</c:forEach>
+	</table>
+</body>
+</html>
